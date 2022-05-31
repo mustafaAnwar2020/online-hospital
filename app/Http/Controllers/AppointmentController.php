@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Profession;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,12 +50,15 @@ class AppointmentController extends Controller
         return redirect()->route('appointments.show');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
+    public function meeting(User $user){
+        return view('Dashboard.Appointments.meeting')->with(['user'=>$user]);
+    }
+
+    public function storemeeting(Appointment $appointment){
+        $user = User::where('id',Auth::id())->first();
+        $user->patientAppointment()->attach($appointment->id);
+        return redirect(url('/'));
+    }
     public function show()
     {
         $appointments = Appointment::where('doctor_id',Auth::id())->get();
@@ -61,10 +66,13 @@ class AppointmentController extends Controller
     }
 
 
+
     public function edit(Appointment $appointment)
     {
         return view('Dashboard.Appointments.edit')->with('appointment',$appointment);
     }
+
+
 
     /**
      * Update the specified resource in storage.

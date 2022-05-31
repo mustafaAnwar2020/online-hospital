@@ -15,7 +15,6 @@ class CreateProfessionsTable extends Migration
     {
         Schema::create('professions', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('name');
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class Hospital extends Model
 
     public function user()
     {
-        return $this->belongsToMany('App\Models\User','user_hospital','hospital_id','user_id');
+        return $this->hasMany('App\Models\User');
     }
 
 }

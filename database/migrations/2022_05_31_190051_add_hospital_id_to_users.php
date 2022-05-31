@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserHospitalTable extends Migration
+class AddHospitalIdToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateUserHospitalTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_hospital', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('hospital_id')->unsigned();
-
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('hospital_id')->unsigned()->nullable();
             $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
         });
     }
@@ -30,6 +26,8 @@ class CreateUserHospitalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_hospital');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }

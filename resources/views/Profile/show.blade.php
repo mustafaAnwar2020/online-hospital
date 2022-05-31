@@ -17,7 +17,6 @@
                                     <p class="text-secondary mb-1">{{ $user->profission->name }}</p>
                                     <p class="text-secondary mb-1">{{ $user->bio }}</p>
                                     @endcan
-
                                 </div>
                             </div>
                         </div>
@@ -32,7 +31,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ Auth::user()->email }}
+                                    {{ $user->email }}
                                 </div>
                             </div>
                             <hr>
@@ -41,7 +40,7 @@
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ Auth::user()->phone }}
+                                    {{ $user->phone }}
                                 </div>
                             </div>
 
@@ -55,23 +54,6 @@
                                 </div>
                             </div>
                             <hr>
-                            @can('clinic-create')
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Degree</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $user->degree }}
-                                </div>
-                            </div>
-                            <hr>
-                            @endcan
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a class="btn btn-info " target="__blank"
-                                        href="{{route('user.edit')}}">Edit</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

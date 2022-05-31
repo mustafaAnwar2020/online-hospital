@@ -16,9 +16,9 @@
                                         <img src="https://cdn.vectorstock.com/i/1000x1000/46/46/people-clinic-logo-design-stethoscope-vector-28654646.webp" alt="Admin"
                                             class="rounded-circle" width="150">
                                         <div class="mt-3">
-                                            <h4>{{ $hospital->name }}</h4>
+                                            <h4>{{ Auth::user()->Hospital->name }}</h4>
                                             <p class="text-secondary mb-1"></p>
-                                            <p class="text-muted font-size-sm">{{$hospital->bio}}</p>
+                                            <p class="text-muted font-size-sm">{{Auth::user()->Hospital->bio}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                             <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{ $hospital->address }}
+                                            {{ Auth::user()->Hospital->address }}
                                         </div>
                                     </div>
                                     <hr>
@@ -41,7 +41,7 @@
                                             <h6 class="mb-0">Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{ $hospital->phone }}
+                                            {{ Auth::user()->Hospital->phone }}
                                         </div>
                                     </div>
                                     <hr>

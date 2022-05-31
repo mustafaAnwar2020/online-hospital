@@ -70,13 +70,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        @if (!Auth::user()->Hospital()->exists())
+                        @if (!Auth::user()->Hospital!=null)
                             <a class="collapse-item" href="{{ route('doctor.addHospital') }}">Add Hospital</a>
-                        @endif
-                        @if (Auth::user()->Hospital()->exists())
+                        @else
                             <a class="collapse-item" href="{{ route('doctor.showHospital') }}">Show Hospital</a>
                         @endif
-
                     </div>
                 </div>
             </li>
@@ -91,11 +89,9 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @if (!Auth::user()->Clinic()->exists())
+                        @if (!Auth::user()->Clinic!= null)
                             <a class="collapse-item" href="{{ route('Clinic.create') }}">Create</a>
-                        @endif
-
-                        @if (Auth::user()->Clinic()->exists())
+                        @else
                             <a class="collapse-item" href="{{ route('clinic.edit') }}">Edit</a>
                             <a class="collapse-item" href="{{ route('clinic.show') }}">show</a>
                         @endif
@@ -302,12 +298,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{route('profile.index')}}">
+                                <a class="dropdown-item" href="{{ route('profile.index') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

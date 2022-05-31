@@ -20,33 +20,26 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::where('id',Auth::id())->first();
-        $prof = Profession::whereHas('user',function($query){
-            $query->where('user_profession.user_id',Auth::id());
-        })->first();
-        return view('Profile.index')->with(['user'=>$user,'prof'=>$prof]);
+        return view('Profile.index')->with(['user'=>$user]);
+    }
+
+    public function show(User $User){
+        return view('Profile.show')->with(['user'=>$User]);
     }
 
     public function edit()
     {
+
         $user = User::where('id',Auth::id())->first();
         $professions = Profession::all();
-        $prof = Profession::whereHas('user',function($query){
-            $query->where('user_profession.user_id',Auth::id());
-        })->first();
         return view('Profile.edit')->with([
             'user'=>$user,
             'professions'=>$professions,
-            'prof'=>$prof
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function update(Request $request)
     {
         $this->validate($request,[
@@ -84,11 +77,8 @@ class ProfileController extends Controller
             'bio' =>$input['bio'] ?? null,
             'degree' =>$input['degree'] ?? null,
             'photo' =>$input['photo'] ?? null,
+            'prof_id' => $input['specialization'] ?? null
         ]);
-        if(request()->has('degree')){
-
-            $user->profission()->sync($input['specialization']);
-        }
         return redirect()->route('profile.index');
 
     }

@@ -54,9 +54,9 @@
                                             class="rounded-circle" width="150">
                                         <div class="mt-3">
                                             <h4>{{ $doctor->name }}</h4>
-                                            <p class="text-secondary mb-1">{{ $prof->name }}</p>
+                                            <p class="text-secondary mb-1">{{ $doctor->profession }}</p>
                                             <p class="text-muted font-size-sm">{{ $doctor->bio }}</p>
-                                            <button class="btn btn-primary">Book a meeting</button>
+                                            <a href="{{route('appointments.meeting',$doctor->id)}}" class="btn btn-primary">Book a meeting</a>
                                         </div>
                                     </div>
                                 </div>

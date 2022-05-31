@@ -31,14 +31,11 @@ class DoctorController extends Controller
 
 
     public function professionDoctors(Profession $profession,Request $request){
-         $doctors = User::whereHas('profission',function($query) use ($profession){
-            $query->where('user_profession.prof_id',$profession->id);
-        })->when($request->search,function($q) use ($request){
-            return $q->where('name','LIKE','%' . $request->search . '%');
-        })->get();
+         $doctors = User::role('Doctor')->where('prof_id',$profession->id)->get();
+
         return view('Doctor.department')->with([
             'doctors'=>$doctors,
-            'prof'=>$profession,
+            'prof'=>$profession
     ]);
     }
 
@@ -72,7 +69,9 @@ class DoctorController extends Controller
             'hospital_id'=>'required'
         ]);
         $user = User::role('Doctor')->find(Auth::id());
-        $user->Hospital()->attach($request->hospital_id);
+        $user->update([
+            'hospital_id'=>$request->hospital_id,
+        ]);
         return redirect()->route('dashboard.index');
     }
 

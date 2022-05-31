@@ -27,7 +27,9 @@ class User extends Authenticatable
         'bio',
         'degree',
         'specialization',
-        'photo'
+        'photo',
+        'prof_id',
+        'hospital_id'
     ];
 
     /**
@@ -50,24 +52,32 @@ class User extends Authenticatable
     ];
 
 
-    /**
-     * Get the profission associated with the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
+
+
+    public function DoctorAppointment()
+    {
+        return $this->hasMany('App\Models\Appointment','doctor_id');
+    }
+
     public function profission()
     {
-        return $this->belongsToMany('App\Models\Profession','user_profession','user_id','prof_id');
+        return $this->belongsTo('App\Models\Profession','prof_id');
     }
 
 
     public function Hospital()
     {
-        return $this->belongsToMany('App\Models\Hospital','user_hospital','user_id','hospital_id')->withPivot('hospital_id');
+        return $this->belongsTo('App\Models\Hospital','hospital_id');
     }
 
     public function Clinic()
     {
-        return $this->belongsToMany('App\Models\Clinic','user_clinic','user_id','clinic_id');
+        return $this->hasOne('App\Models\Clinic');
+    }
+
+
+    public function patientAppointment()
+    {
+        return $this->belongsToMany('App\Models\Appointment', 'user_appointment', 'user_id', 'appointment_id');
     }
 }

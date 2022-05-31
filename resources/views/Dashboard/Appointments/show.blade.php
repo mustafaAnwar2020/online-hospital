@@ -25,8 +25,8 @@
 
                     <tr>
                         <td>{{ $i++ }}</a></td>
-                        <td>{{ $item->start_time }}</a></td>
-                        <td>{{ $item->finish_time }}</a></td>
+                        <td>{{ Carbon\Carbon::parse($item->start_time)->diffForHumans(['parts'=>2]) }}</a></td>
+                        <td>{{ Carbon\Carbon::parse($item->finish_time)->diffForHumans(['parts'=>2]) }}</a></td>
                         <td>{{ $item->price }}</a></td>
                         <td>
                             <a class="btn btn-sm btn-info" href="{{route('appointment.edit',$item)}}">

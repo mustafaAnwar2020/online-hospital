@@ -13,7 +13,7 @@ class Appointment extends Model
 
     public function doctor()
     {
-        return $this->hasOne('App\Models\User', 'doctor_id');
+        return $this->belongsTo('App\Models\User','doctor_id');
     }
 
     /**

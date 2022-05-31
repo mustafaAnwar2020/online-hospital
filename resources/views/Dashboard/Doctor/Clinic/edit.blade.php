@@ -10,10 +10,10 @@
                     class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form method="POST" action="{{ route('clinic.update') }}">
+                <form method="POST" action="{{ route('Clinic.update',$clinic) }}">
                     @csrf
                     @method('PUT')
-                    <h5 class="card-title text-center mb-5 fw-light fs-5">Add Clinic</h5>
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Update Clinic</h5>
                     <!-- Email input -->
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example3">Name</label>

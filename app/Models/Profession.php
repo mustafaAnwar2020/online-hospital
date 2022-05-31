@@ -13,6 +13,6 @@ class Profession extends Model
 
     public function user()
     {
-        return $this->belongsToMany('App\Models\User','user_profession','prof_id','user_id');
+        return $this->hasMany('App\Models\User');
     }
 }

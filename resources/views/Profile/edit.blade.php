@@ -18,7 +18,7 @@
                                 <label for="floatingInputEmail">Email address</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     id="floatingInputUsername" placeholder="Email" value="{{ $user->email }}" name="email"
-                                    required autocomplete="email" autofocus>
+                                     autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                                 <label for="floatingInputUsername">Username</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="floatingInputUsername" placeholder="username" name="name"
-                                    value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                    value="{{ $user->name }}"  autocomplete="name" autofocus>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                 <label for="floatingInputUsername">Phone</label>
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror"
                                     id="floatingInputUsername" placeholder="phone" name="phone" value="{{ $user->phone }}"
-                                    required autocomplete="phone" autofocus>
+                                     autocomplete="phone" autofocus>
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -66,7 +66,7 @@
                                 <label for="floatingInputUsername">Address</label>
                                 <input type="text" class="form-control @error('address') is-invalid @enderror"
                                     id="floatingInputUsername" placeholder="address" name="Address"
-                                    value="{{ $user->Address }}" required autocomplete="address" autofocus>
+                                    value="{{ $user->Address }}"  autocomplete="address" autofocus>
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,7 +98,7 @@
 
                                 <select name="specialization" id="floatingInputUsername">
                                     @foreach ($professions as $item)
-                                        <option value="{{$item->id}}" {{ $item->id == $prof->id ? 'selected':''}}>{{$item->name}}</option>
+                                        <option value="{{$item->id}}" {{ $item->id == $user->profission->id ? 'selected':''}}>{{$item->name}}</option>
                                     @endforeach
 
 
@@ -138,7 +138,7 @@
                                 <label for="floatingPassword">Password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     id="floatingInputUsername" placeholder="password" name="password"
-                                    value="{{ old('password') }}" required autocomplete="password" autofocus>
+                                    value="{{ old('password') }}"  autocomplete="password" autofocus>
 
 
                                 @error('password')
@@ -151,7 +151,7 @@
                             <div class="form-floating mb-3">
                                 <label for="floatingPasswordConfirm">Confirm Password</label>
                                 <input id="password-confirm" type="password" placeholder="confirm password"
-                                    class="form-control" name="password_confirmation" required
+                                    class="form-control" name="password_confirmation"
                                     autocomplete="new-password">
 
                             </div>
@@ -170,7 +170,7 @@
                             <div class="d-grid mb-2">
                                 <div class="d-block text-center mt-2 small">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('Update') }}
                                     </button>
                                 </div>
                             </div>

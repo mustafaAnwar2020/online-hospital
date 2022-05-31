@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/profile/edit','App\Http\Controllers\ProfileController@edit')->name('user.edit');
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
@@ -36,12 +37,15 @@ Route::resource('/doctor/dashboard','App\Http\Controllers\DoctorController');
 Route::resource('/Hospital','App\Http\Controllers\HospitalController');
 Route::get('/clinic/edit','App\Http\Controllers\ClinicController@edit')->name('clinic.edit');
 Route::get('/clinic/show','App\Http\Controllers\ClinicController@show')->name('clinic.show');
-Route::put('/clinic/update','App\Http\Controllers\ClinicController@update')->name('clinic.update');
 Route::resource('/Clinic','App\Http\Controllers\ClinicController');
+Route::get('/appointment/doctor/{user}','App\Http\Controllers\AppointmentController@meeting')->name('appointments.meeting');
+Route::post('/appointment/patient/{appointment}','App\Http\Controllers\AppointmentController@storemeeting')->name('appointments.storemeeting');
 Route::get('/appointment/edit','App\Http\Controllers\AppointmentController@edit')->name('appointments.edit');
 Route::get('/appointment/show','App\Http\Controllers\AppointmentController@show')->name('appointments.show');
 Route::put('/appointment/update','App\Http\Controllers\AppointmentController@update')->name('appointments.update');
 Route::resource('/appointment','App\Http\Controllers\AppointmentController');
-Route::get('/profile/edit','App\Http\Controllers\ProfileController@edit')->name('user.edit');
+
+Route::get('/profile/{User}','App\Http\Controllers\ProfileController@show')->name('user.show');
+
 Route::resource('/profile','App\Http\Controllers\ProfileController');
 

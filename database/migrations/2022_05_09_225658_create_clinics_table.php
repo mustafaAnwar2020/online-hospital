@@ -19,6 +19,10 @@ class CreateClinicsTable extends Migration
             $table->longText('bio');
             $table->string('address');
             $table->string('phone');
+            $table->integer('user_id')->unsigned();
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

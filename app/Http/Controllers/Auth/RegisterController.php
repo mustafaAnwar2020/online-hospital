@@ -81,6 +81,7 @@ class RegisterController extends Controller
 
         }
 
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -96,7 +97,10 @@ class RegisterController extends Controller
 
         if(request()->has('degree')){
 
-            $user->profission()->attach($data['specialization']);
+
+            $user->update([
+                'prof_id'=>$data['specialization']
+            ]);
         }
         return $user;
     }

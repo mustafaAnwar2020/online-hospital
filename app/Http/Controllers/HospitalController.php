@@ -61,10 +61,7 @@ class HospitalController extends Controller
     }
 
     public function showDoctor(){
-        $hospital = Hospital::whereHas('user',function($query){
-            $query->where('user_hospital.user_id',Auth::id());
-        })->first();
-        return view('Dashboard.Doctor.Hospital.show')->with('hospital',$hospital);
+        return view('Dashboard.Doctor.Hospital.show');
     }
     /**
      * Show the form for editing the specified resource.
