@@ -23,11 +23,11 @@ use App\Http\Controllers\AppointmentController;
 
     Route::get('/profile/edit',[ProfileController::class,'edit'])
         ->name('user.edit');
-        
+
     Route::get('/profile/{User}',[ProfileController::class,'show'])
         ->name('user.show');
         
-    Route::resource('/profile',[ProfileController::class]);
+    Route::resource('/profile',ProfileController::class);
 
     Route::get('/', [HomeController::class,'index']);
 
@@ -37,9 +37,9 @@ use App\Http\Controllers\AppointmentController;
 
     Route::prefix('admin')->name('admin.')->group(function(){
 
-        Route::resource('/roles',[RoleController::class]);
+        Route::resource('/roles',RoleController::class);
         
-        Route::resource('/professions',[ProfessionController::class]);
+        Route::resource('/professions',ProfessionController::class);
     });
 
     Route::get('/Department/{profession}/Doctors',[DoctorController::class,'professionDoctors'])
@@ -51,12 +51,12 @@ use App\Http\Controllers\AppointmentController;
     Route::post('/doctor/dashboard/Hospital/AddHospital',[DoctorController::class,'storeHospital'])
         ->name('doctor.storeHospital');
 
-    Route::resource('/doctor/dashboard',[DoctorController::class]);
+    Route::resource('/doctor/dashboard',DoctorController::class);
 
     Route::get('/doctor/dashboard/Hospital/Show',[HospitalController::class,'showDoctor'])
         ->name('doctor.showHospital');
 
-    Route::resource('/Hospital',[HospitalController::class]);
+    Route::resource('/Hospital',HospitalController::class);
 
     Route::get('/clinic/edit',[ClinicController::class,'edit'])
         ->name('clinic.edit');
@@ -64,7 +64,7 @@ use App\Http\Controllers\AppointmentController;
     Route::get('/clinic/show',[ClinicController::class,'show'])
         ->name('clinic.show');
 
-    Route::resource('/Clinic',[ClinicController::class]);
+    Route::resource('/Clinic',ClinicController::class);
 
 
     Route::get('/appointment/doctor/{user}/appointment/{appointment}',[AppointmentController::class,'bookMeeting'])
@@ -91,5 +91,5 @@ use App\Http\Controllers\AppointmentController;
     Route::put('/appointment/update',[AppointmentController::class,'update'])
         ->name('appointments.update');
 
-    Route::resource('/appointment',[AppointmentController::class]);
+    Route::resource('/appointment',AppointmentController::class);
 
