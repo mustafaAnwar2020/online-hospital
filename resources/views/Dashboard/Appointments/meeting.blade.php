@@ -55,11 +55,8 @@
                                     <td>{{ $item->price }}</a></td>
                                     <td>
 
-                                        <form action="{{ route('appointments.storemeeting', $item) }}" method="POST"
-                                            style="display: inline-block;">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="submit" class="btn btn-sm btn-success" value="book">
-                                        </form>
+                                        <a href="{{ route('appointments.bookmeeting', ['user' => $user, 'appointment' => $item]) }}"
+                                            class="btn btn-sm btn-success">Book</a>
                                     </td>
                                 </tr>
                             @endforeach

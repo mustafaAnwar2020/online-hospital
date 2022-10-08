@@ -35,9 +35,7 @@
                                     <div class="body">
                                         <a href="{{route('Hospital.show',$item)}}"><p class="text-xl mb-0">{{$item->name}}</p></a>
                                         <span class="text-sm text-grey">{{$item->phone}}</span>
-                                        <p>@foreach ($item->user as $user)
-                                            <a href="{{route('do')}}">{{$user->name}}</a>
-                                        @endforeach</p>
+
 
                                     </div>
                                 </div>

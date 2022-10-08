@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use App\Models\Profession;
+use Stripe\Exception\CardException;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Stripe;
 class AppointmentController extends Controller
 {
     /**
@@ -54,9 +54,14 @@ class AppointmentController extends Controller
         return view('Dashboard.Appointments.meeting')->with(['user'=>$user]);
     }
 
+    public function bookMeeting(User $user,Appointment $appointment){
+        return view('Dashboard.Appointments.bookMeeting')->with([
+            'user'=>$user,
+            'apponitment'=>$appointment
+        ]);
+    }
     public function storemeeting(Appointment $appointment){
-        $user = User::where('id',Auth::id())->first();
-        $user->patientAppointment()->attach($appointment->id);
+
         return redirect(url('/'));
     }
     public function show()
@@ -104,5 +109,32 @@ class AppointmentController extends Controller
     {
         $appointment->delete($appointment->id);
         return redirect()->route('appointments.show');
+    }
+
+
+    public function checkout(Request $request , Appointment $app){
+
+
+        try{
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create([
+            "amount" => $app->price * 100,
+            'currency' => 'USD',
+            'source' => $request->stripeToken,
+            'description' => 'Doctor Appointment',
+            'receipt_email' => $request->email,
+        ]);
+
+        $user = User::where('id',Auth::id())->first();
+        $user->patientAppointment()->attach($app->id);
+        }
+        catch(CardException $e){
+            return back()->withErrors('Error! ' . $e->getMessage());
+        }
+        return redirect()->route('appointments.confirm');
+    }
+
+    public function confirm(){
+        return view('Dashboard.Appointments.confirm');
     }
 }
