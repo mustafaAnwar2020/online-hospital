@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Admin\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,9 +38,20 @@ use App\Http\Controllers\AppointmentController;
 
     Route::prefix('admin')->name('admin.')->group(function(){
 
-        Route::resource('/roles',RoleController::class);
+        Route::get('/login',[AdminController::class,'login'])
+        ->name('admin.login');
+
+        Route::get('/login',[AdminController::class,'doLogin'])
+            ->name('adminDoLogin');
+
+        Route::group(['middleware' => 'adminauth'], function () {
+
+            Route::resource('/roles',RoleController::class);
+            
+            Route::resource('/professions',ProfessionController::class);
         
-        Route::resource('/professions',ProfessionController::class);
+        });
+
     });
 
     Route::get('/Department/{profession}/Doctors',[DoctorController::class,'professionDoctors'])
