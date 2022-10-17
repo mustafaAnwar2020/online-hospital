@@ -11,6 +11,7 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ use App\Http\Controllers\Admin\AdminController;
 
     Route::get('/profile/{User}',[ProfileController::class,'show'])
         ->name('user.show');
-        
+
     Route::resource('/profile',ProfileController::class);
 
     Route::get('/', [HomeController::class,'index']);
@@ -38,18 +39,18 @@ use App\Http\Controllers\Admin\AdminController;
 
     Route::prefix('admin')->name('admin.')->group(function(){
 
-        Route::get('/login',[AdminController::class,'login'])
-        ->name('admin.login');
+        Route::get('/login',[AuthController::class,'login'])
+            ->name('login');
 
-        Route::get('/login',[AdminController::class,'doLogin'])
+        Route::post('/login',[AuthController::class,'doLogin'])
             ->name('adminDoLogin');
 
         Route::group(['middleware' => 'adminauth'], function () {
 
             Route::resource('/roles',RoleController::class);
-            
+
             Route::resource('/professions',ProfessionController::class);
-        
+
         });
 
     });
@@ -72,7 +73,7 @@ use App\Http\Controllers\Admin\AdminController;
 
     Route::get('/clinic/edit',[ClinicController::class,'edit'])
         ->name('clinic.edit');
-    
+
     Route::get('/clinic/show',[ClinicController::class,'show'])
         ->name('clinic.show');
 
@@ -84,13 +85,13 @@ use App\Http\Controllers\Admin\AdminController;
 
     Route::post('/appointment/checkout/{app}',[AppointmentController::class,'checkout'])
         ->name('appointments.checkout');
-    
+
     Route::get('/appointment/confirm',[AppointmentController::class,'confirm'])
         ->name('appointments.confirm');
 
     Route::get('/appointment/doctor/{user}',[AppointmentController::class,'meeting'])
         ->name('appointments.meeting');
-    
+
     Route::post('/appointment/patient/{appointment}',[AppointmentController::class,'storemeeting'])
         ->name('appointments.storemeeting');
 
@@ -99,7 +100,7 @@ use App\Http\Controllers\Admin\AdminController;
 
     Route::get('/appointment/show',[AppointmentController::class,'show'])
         ->name('appointments.show');
-    
+
     Route::put('/appointment/update',[AppointmentController::class,'update'])
         ->name('appointments.update');
 
