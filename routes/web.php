@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\HomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +47,10 @@ use App\Http\Controllers\Admin\AuthController;
             ->name('adminDoLogin');
 
         Route::group(['middleware' => 'adminauth'], function () {
+            Route::get('/index',[HomController::class,'index'])
+                ->name('admin.index');
 
-            Route::resource('/roles',RoleController::class);
+            Route::resource('/roles',RoleController::class)->except('show');
 
             Route::resource('/professions',ProfessionController::class);
 
